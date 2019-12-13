@@ -33,11 +33,7 @@ namespace SecurityCourse.Controllers
         [HttpPost("[action]")]
         public AuthResponse Login([FromBody] AuthRequest request)
         {
-            var document = BsonDocument.Parse($@"{{
-                                                     Login : ""{request.Login}"" , Password: /{request.Password}/i
-                                                }}");
-
-            var accountFound = _accounts.Find(document).Any();
+            var accountFound = _accounts.Find(x => x.Login == request.Login && request.Password == x.Password).Any();
 
             return new AuthResponse
             {
