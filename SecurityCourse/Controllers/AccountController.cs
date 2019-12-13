@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -42,6 +43,14 @@ namespace SecurityCourse.Controllers
             {
                 IsAuthorized = accountFound
             };
+        }
+
+        [HttpGet("[action]")]
+        public IActionResult File()
+        {
+            var image = System.IO.File.OpenRead(Path.Combine(Directory.GetCurrentDirectory(), "Assets", "catker.png"));
+
+            return File(image,"image/png", "catker.png");
         }
     }
 

@@ -9,6 +9,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent, AuthService } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { AuthGuard } from "./auth.guard";
+import { AccessErrorComponent } from "./access-error/access-error.component";
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { AuthGuard } from "./auth.guard";
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
+    AccessErrorComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,6 +27,7 @@ import { AuthGuard } from "./auth.guard";
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
       { path: 'admin', component: CounterComponent, canActivate: [AuthGuard] },
+      { path: 'access-error', component: AccessErrorComponent},
     ])
   ],
   providers: [],
