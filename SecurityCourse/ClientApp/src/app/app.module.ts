@@ -8,7 +8,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent, AuthService } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { AuthGuard } from "./auth.guard";
 
 @NgModule({
   declarations: [
@@ -16,7 +16,6 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -25,7 +24,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'admin', component: CounterComponent },
+      { path: 'admin', component: CounterComponent, canActivate: [AuthGuard] },
     ])
   ],
   providers: [],
