@@ -39,6 +39,7 @@ export class HomeComponent implements OnInit {
     loginForm: FormGroup;
     isSubmitted = false;
     isLoggedIn = false;
+    errorMessage = undefined;
 
     constructor(private authService: AuthService, private router: Router, private formBuilder: FormBuilder) {
       
@@ -50,7 +51,8 @@ export class HomeComponent implements OnInit {
         password: ['', Validators.required]
       });
 
-      this.isLoggedIn = this.authService.isLoggedIn();
+        this.isLoggedIn = this.authService.isLoggedIn();
+        this.errorMessage = undefined;
     }
 
     get formControls() { return this.loginForm.controls; }
@@ -68,6 +70,7 @@ export class HomeComponent implements OnInit {
                 if (isLogged) {
                   this.router.navigateByUrl('/admin');
                 } else {
+                  this.errorMessage = "Invalid credentials.";
                   this.isSubmitted = false;
                 } 
             },
