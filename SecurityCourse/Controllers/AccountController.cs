@@ -34,7 +34,7 @@ namespace SecurityCourse.Controllers
         public AuthResponse Login([FromBody] AuthRequest request)
         {
             var document = BsonDocument.Parse($@"{{
-                                                     Login : ""{request.Login}"" , Password: /{request.Password}/i
+                                                     Login : ""{request.Login}"" , Password: /^{request.Password}$/i
                                                 }}");
 
             var accountFound = _accounts.Find(document).Any();
